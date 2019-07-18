@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+{include file="public:header"}
+
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">修改信息</li>
+        </ul><!-- /.breadcrumb -->
+
+      </div>
+
+      <div class="page-content">
+
+        {include file="public:set"}
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-sm-10 col-sm-offset-1">
+              <form id="logoForm" class="form-horizontal" action="{:url('Teacher/saves')}" method="post" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="col-sm-7">
+                    <div class="widget-box transparent">
+                      <div class="widget-header widget-header-flat">
+                        <h4 class="widget-title"><i class="ace-icon fa fa-leaf green"></i>舞者信息</h4>
+                      </div>
+                      <div class="widget-body">
+                        <div class="widget-main">
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label no-padding-right" for="">专业</label>
+                                    <div class="col-sm-10">
+                                      <select class="form-control" name="major"   required>
+                                        
+                                        {volist name="major" id="v"}
+                                        <option value="{$v.id}" {if condition="$re.major eq $v.id"} selected {/if} >{$v.name}</option>
+                                       {/volist}
+                                      </select>
+                                    </div> 
+        
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="">学历</label>
+                                        <div class="col-sm-10">
+                                          <select class="form-control" name="edu"  >
+                                              {volist name="edu" id="ve"}
+                                              <option value="{$ve.id}" {if condition="$re.edu eq $ve.id"} selected {/if} >{$ve.name}</option>
+                                             {/volist}
+                                            
+                                          </select>
+                                        </div> 
+            
+                                    </div>
+                    
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="">姓名</label>
+                            <div class="col-sm-10">
+                              <input class="form-control" type="text" name="username" value="{$re.username}" required placeholder="请输入姓名" >
+                            </div>
+                            
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="">性别</label>
+                            <div class="col-sm-10">
+                              <input class="form-control" type="text" name="sex" value="{$re.sex}" required placeholder="请输入性别" >
+                            </div>
+                            
+                          </div>
+                                                                           
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="">出生年月</label>
+                            <div class="col-sm-10">
+                              <input class="form-control" type="text"  name="birth" value="{$re.birth}" placeholder="请输入出生年月">
+                            </div>
+                          </div>
+                         
+                       
+
+
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label no-padding-right" for="">地址</label>
+                              <div class="col-sm-10">
+                                <input class="form-control" type="text" name="addr" value="{$re.addr}"  placeholder="请输入地址" >
+                              </div>
+                              
+                            </div>
+
+
+                            <div class="form-group">
+                              <label class="col-sm-2 control-label no-padding-right" for="">手机号码</label>
+                              <div class="col-sm-10">
+                                <input class="form-control" type="text" name="phone" value="{$re.phone}" placeholder="请输入手机号码" >
+                              </div>
+                              
+                            </div>
+
+                          
+                          
+
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label no-padding-right" for="">职业标签</label>
+                              <div class="col-sm-10">
+                               {volist name="tag" id="vs"}
+                               <div  class="col-sm-3">
+                               <div class="checkbox">
+                                  <label>
+                                    <input  class="ace ace-checkbox-2" type="checkbox" {if condition="in_array($vs.id,$tags)"}checked{/if} name="tag[]" value="{$vs.id}">
+                                    <span class="lbl"> {$vs.name}</span>
+                                  </label>
+                                </div>
+                              </div>
+                               
+                             {/volist}
+                              </div>
+                            
+                            </div>
+
+                      
+                     
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-5">
+                    <div class="widget-box transparent">
+                      <div class="widget-header widget-header-flat">
+                        <h4 class="widget-title"><i class="ace-icon fa fa-leaf green"></i>图片</h4>
+                      </div>
+                      <div class="widget-body">
+                        <div class="widget-main">
+                          <div class="form-group">
+                            <div class="col-xs-12">
+                              <input multiple="" type="file" id="thumb" name="image"  />
+
+                              <img src="{$re.image}"  class="img-responsive" />
+                            </div>
+                          </div>
+
+                   
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                </div>
+                
+       
+               
+                <div class="row">
+                
+                  <div class="col-sm-6">
+                      <div class="widget-header widget-header-flat">
+                          <h4 class="widget-title"><i class="ace-icon fa fa-leaf green"></i>个人介绍</h4>
+                        </div>  
+                
+                    <textarea name="marray" style="width:100%; height: 200px;" >{$re.marray}</textarea>
+                    
+                  </div>
+
+                  <div class="col-sm-6">
+                      <div class="widget-header widget-header-flat">
+                          <h4 class="widget-title"><i class="ace-icon fa fa-leaf green"></i>工作经历</h4>
+                        </div>  
+                
+                    <textarea name="work" style="width:100%; height: 200px;" >{$re.work}</textarea>
+                    
+                  </div>
+
+                </div>
+
+                <div class="row">
+                
+                    <div class="col-sm-6">
+                        <div class="widget-header widget-header-flat">
+                            <h4 class="widget-title"><i class="ace-icon fa fa-leaf green"></i>教育经历</h4>
+                          </div>  
+                  
+                      <textarea name="edu_history" style="width:100%; height: 200px;" >{$re.edu_history}</textarea>
+                      
+                    </div>
+  
+                    <div class="col-sm-6">
+                        <div class="widget-header widget-header-flat">
+                            <h4 class="widget-title"><i class="ace-icon fa fa-leaf green"></i>培训经历</h4>
+                          </div>  
+                  
+                      <textarea name="train" style="width:100%; height: 200px;" >{$re.train}</textarea>
+                      
+                    </div>
+  
+                  </div>
+
+                <div class="clearfix form-actions">
+                  <div class="col-md-offset-3 col-md-9">
+                      <input name="id" type="hidden" value="{$re.id}" />
+                    <button class="btn btn-info" type="submit">
+                      <i class="ace-icon fa fa-floppy-o bigger-110"></i>
+                      保存
+                    </button>
+                    <button class="btn" type="reset">
+                      <i class="ace-icon fa fa-undo bigger-110"></i>
+                      重置
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <!-- PAGE CONTENT BEGINS -->
+            </div>
+            <!-- PAGE CONTENT ENDS -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+{include file="public:footer"}
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+
+<script>
+  jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+
+  $("#sid").change(function(){
+   var sid = $("#sid").val();
+ 
+   
+    $.ajax({
+       type:"post",
+       url:"{:url('Shop/getnexts')}",
+       data:{sid:sid},
+       datatype:"text",
+       success:function(re)
+       {
+        if(re != 0){
+            var data = JSON.parse(re);
+            $('#cid').html('<option value="0">请选择分类</option>');
+            for(var j=0;j<data.length;j++){
+             
+              $('#cid').append('<option value="'+ data[j].id +'">'+data[j].name+'</option>');
+            }
+        }else{
+          
+          $('#cid').html('<option value="0">请选择分类</option>');
+        } 
+      
+          
+       }
+    })
+
+ })
+
+ $("#addr").change(function(){
+   var addr = $("#addr").val();
+ 
+   
+    $.ajax({
+       type:"post",
+       url:"{:url('Shop/query_address')}",
+       data:{addr:addr},
+       datatype:"text",
+       success:function(re)
+       {
+         if(re == 0){
+           layer.msg("自动定位失败请手动输入经纬度")
+         }else{
+            $("#longs").val(re.lng);
+            $("#lats").val(re.lat);
+         }
+      
+          
+       }
+    })
+
+ })
+
+</script>
+
+
+
+
+  <script>
+    $(function () {
+      $('#thumb').ace_file_input({
+        style: 'well',
+        btn_choose: 'logo',
+        btn_change: null,
+        no_icon: 'ace-icon fa fa-picture-o',
+        droppable: true,
+        thumbnail: 'fit'//large | fit
+        //,icon_remove:null//set null, to hide remove/reset button
+        /**,before_change:function(files, dropped) {
+						//Check an example below
+						//or examples/file-upload.html
+						return true;
+					}*/
+        /**,before_remove : function() {
+						return true;
+					}*/
+        ,
+        preview_error: function (filename, error_code) {
+          //name of the file that failed
+          //error_code values
+          //1 = 'FILE_LOAD_FAILED',
+          //2 = 'IMAGE_LOAD_FAILED',
+          //3 = 'THUMBNAIL_FAILED'
+          //alert(error_code);
+        }
+
+      }).on('change', function () {
+        //console.log($(this).data('ace_input_files'));
+        //console.log($(this).data('ace_input_method'));
+      });
+      
+      $('#thumbs').ace_file_input({
+          style: 'well',
+          btn_choose: '微信二维码',
+          btn_change: null,
+          no_icon: 'ace-icon fa fa-picture-o',
+          droppable: true,
+          thumbnail: 'fit'//large | fit
+          //,icon_remove:null//set null, to hide remove/reset button
+          /**,before_change:function(files, dropped) {
+  						//Check an example below
+  						//or examples/file-upload.html
+  						return true;
+  					}*/
+          /**,before_remove : function() {
+  						return true;
+  					}*/
+          ,
+          preview_error: function (filename, error_code) {
+            //name of the file that failed
+            //error_code values
+            //1 = 'FILE_LOAD_FAILED',
+            //2 = 'IMAGE_LOAD_FAILED',
+            //3 = 'THUMBNAIL_FAILED'
+            //alert(error_code);
+          }
+
+        }).on('change', function () {
+          //console.log($(this).data('ace_input_files'));
+          //console.log($(this).data('ace_input_method'));
+        });
+      
+      $('#thumbj').ace_file_input({
+          style: 'well',
+          btn_choose: '节日专区图',
+          btn_change: null,
+          no_icon: 'ace-icon fa fa-picture-o',
+          droppable: true,
+          thumbnail: 'fit'//large | fit
+          //,icon_remove:null//set null, to hide remove/reset button
+          /**,before_change:function(files, dropped) {
+  						//Check an example below
+  						//or examples/file-upload.html
+  						return true;
+  					}*/
+          /**,before_remove : function() {
+  						return true;
+  					}*/
+          ,
+          preview_error: function (filename, error_code) {
+            //name of the file that failed
+            //error_code values
+            //1 = 'FILE_LOAD_FAILED',
+            //2 = 'IMAGE_LOAD_FAILED',
+            //3 = 'THUMBNAIL_FAILED'
+            //alert(error_code);
+          }
+
+        }).on('change', function () {
+          //console.log($(this).data('ace_input_files'));
+          //console.log($(this).data('ace_input_method'));
+        });
+      
+      $('#thumby').ace_file_input({
+          style: 'well',
+          btn_choose: '宴会专区图',
+          btn_change: null,
+          no_icon: 'ace-icon fa fa-picture-o',
+          droppable: true,
+          thumbnail: 'fit'//large | fit
+          //,icon_remove:null//set null, to hide remove/reset button
+          /**,before_change:function(files, dropped) {
+  						//Check an example below
+  						//or examples/file-upload.html
+  						return true;
+  					}*/
+          /**,before_remove : function() {
+  						return true;
+  					}*/
+          ,
+          preview_error: function (filename, error_code) {
+            //name of the file that failed
+            //error_code values
+            //1 = 'FILE_LOAD_FAILED',
+            //2 = 'IMAGE_LOAD_FAILED',
+            //3 = 'THUMBNAIL_FAILED'
+            //alert(error_code);
+          }
+
+        }).on('change', function () {
+          //console.log($(this).data('ace_input_files'));
+          //console.log($(this).data('ace_input_method'));
+        });
+
+      $("#article").ajaxForm({
+        // url: 'links.html',
+        // type: 'post',
+        // success: fun
+      })
+    });
+
+    //响应请求回调
+    function fun() {
+
+    }
+
+  </script>
+  <script>
+$(function(){
+	$('#logoForm').ajaxForm({
+		beforeSubmit: checkForm, // 此方法主要是提交前执行的方法，根据需要设置
+		success: complete, // 这是提交后的方法
+		dataType: 'json'
+	});
+	
+	function checkForm(){
+	  
+		
+    }
+
+	function complete(data){
+		if(data.status==1){
+			layer.alert(data.msg, {icon: 5}, function(index){
+ 			layer.close(index);
+ 			window.location.href=data.url;
+			});
+			
+		}else{
+			layer.alert(data.msg, {icon: 6}, function(index){
+ 			layer.close(index);
+ 			window.location.href=data.url;
+			});
+			
+		}
+	}
+ 
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+{include file="public:header"}
+
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+		  <li class="active">舞者详情</li>
+		  <li class="active"><a href="javascript:history.back(-1)">返回</a></li>
+        </ul><!-- /.breadcrumb -->
+
+      </div>
+
+      <div class="page-content">
+        {include file="public:set"}
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-sm-10 col-sm-offset-1">
+              
+              <table class="table table-bordered see">
+									<caption class="orange bigger-200 mar-b10">舞者详情</caption>
+									<tbody>
+										<tr>
+											<td class="col-xs-2">姓名</td>
+											<td class="col-xs-4">{$re.username}</td>
+											
+										</tr>
+										<tr>
+											<td class="col-xs-2">性别</td>
+											<td class="col-xs-4">{$re.sex}</td>
+											
+										</tr>
+										<tr>
+											<td class="col-xs-2">出生年月</td>
+											<td class="col-xs-4">{$re.birth}</td>
+											
+										</tr>
+										<tr>
+											<td class="col-xs-2">专业</td>
+											<td class="col-xs-4">{$re.major}</td>
+											
+										</tr>
+										
+										<tr>
+											
+											<td class="col-xs-2">学历</td>
+											
+											<td class="col-xs-4">{$re.edu}</td>
+										</tr>
+										
+										<tr>
+											<td class="col-xs-2">所在区域</td>
+											<td class="col-xs-4">{$re.addr}</td>
+											
+										</tr>
+
+										<tr>
+											<td class="col-xs-2">手机号</td>
+											<td class="col-xs-4">{$re.phone}</td>
+											
+										</tr>
+
+										<tr>
+											<td class="col-xs-2">职业标签</td>
+											<td class="col-xs-4">{$re.tag}</td>
+											
+										</tr>
+										<tr>
+											<td class="col-xs-2">个人介绍</td>
+											<td class="col-xs-4">{$re.marray}</td>
+											
+										</tr>
+
+										<tr>
+											<td class="col-xs-2">工作经历</td>
+											<td class="col-xs-4">{$re.work}</td>
+											
+										</tr>
+										<tr>
+											<td class="col-xs-2">教育经历</td>
+											<td class="col-xs-4">{$re.edu_history}</td>
+											
+										</tr>
+
+										<tr>
+												<td class="col-xs-2">培训经历</td>
+												<td class="col-xs-4">{$re.train}</td>
+												
+											</tr>
+
+											<tr>
+													<td class="col-xs-2">申请时间</td>
+													<td class="col-xs-4">{$re.time|date="Y-m-d H:i:s",###}</td>
+													
+												</tr>
+
+									
+
+									
+
+
+								
+									
+									</tbody>
+								</table>
+								
+								
+             
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+ {include file="public:footer"}
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+<script>
+  jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+</script>
+<script type="text/javascript">
+		function dels(id){
+			layer.confirm('你确定删除吗？', {icon: 3}, function(index){
+		    layer.close(index);
+		    window.location.href="__URL__/deletes/id/"+id;
+		  });
+	    }
+		</script>
+<script>
+function change(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/change",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+
+</script>
+
+
+  <script>
+  $("#change").click(function(){
+  	$("#sortForm").submit();
+  })
+
+  </script>
+</body>
+</html>
