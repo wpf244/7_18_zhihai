@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+{include file="public:header"}
+
+<body class="no-skin">
+<!--头部-->
+{include file="public:nav"}
+
+<div class="main-container ace-save-state" id="main-container">
+  <!--菜单-->
+  <script type="text/javascript">
+  try{ace.settings.loadState('main-container')}catch(e){}
+</script>
+
+{include file="public:left"}
+
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+        <ul class="breadcrumb">
+          <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="{:url('Index/index')}">首页</a>
+          </li>
+          <li class="active">订单详情</li>
+        </ul><!-- /.breadcrumb -->
+
+      </div>
+
+      <div class="page-content">
+        {include file="public:set"}
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-sm-10 col-sm-offset-1">
+              
+              <table class="table table-bordered see">
+									<caption class="orange bigger-200 mar-b10">订单详情</caption>
+									<tbody>
+										<tr>
+											<td class="col-xs-2">订单编号</td>
+											<td class="col-xs-4">{$re.time}</td>
+											
+										</tr>
+										<tr>
+											<td class="col-xs-2">文件语言</td>
+											<td class="col-xs-4">{$re.langs}</td>
+											
+										</tr>
+										
+										<tr>
+											
+											<td class="col-xs-2">翻译语言</td>
+											
+											<td class="col-xs-4">{$re.aim}</td>
+										</tr>
+										
+										<tr>
+											<td class="col-xs-2">专业领域</td>
+											<td class="col-xs-4">{$re.major}</td>
+											
+										</tr>
+
+										<tr>
+												<td class="col-xs-2">翻译级别</td>
+												<td class="col-xs-4">{$re.level}</td>
+												
+											</tr>
+
+											<tr>
+													<td class="col-xs-2">是否翻译</td>
+													<td class="col-xs-4">{if condition="$re.compos eq 1"}是 {else /} 否 {/if}</td>
+													
+												</tr>
+
+												<tr>
+											
+														<td class="col-xs-2">期望交稿时间</td>
+														<td class="col-xs-4">{$re.dates}</td>
+													</tr>
+										
+										<tr>
+											
+											<td class="col-xs-2">订单备注</td>
+											<td class="col-xs-4">{$re.content}</td>
+										</tr>
+
+										<tr>
+											
+												<td class="col-xs-2">姓名</td>
+												<td class="col-xs-4">{$re.username}</td>
+											</tr>
+
+											<tr>
+											
+													<td class="col-xs-2">手机号码</td>
+													<td class="col-xs-4">{$re.phone}</td>
+												</tr>
+
+												<tr>
+											
+														<td class="col-xs-2">邮箱</td>
+														<td class="col-xs-4">{$re.email}</td>
+													</tr>
+
+													<tr>
+											
+															<td class="col-xs-2">qq</td>
+															<td class="col-xs-4">{$re.qq}</td>
+														</tr>
+														<tr>
+											
+																<td class="col-xs-2">原文件</td>
+																<td class="col-xs-4"><a href="{$re.file}">点击下载</a></td>
+															</tr>
+															<tr>
+											
+																	<td class="col-xs-2">总价</td>
+																	<td class="col-xs-4">{$re.money}</td>
+																</tr>
+																<tr>
+											
+																		<td class="col-xs-2">定金</td>
+																		<td class="col-xs-4">{$re.money_ding}</td>
+																	</tr>
+																	<tr>
+											
+																			<td class="col-xs-2">中间款</td>
+																			<td class="col-xs-4">{$re.money_zhong}</td>
+																		</tr>
+																		<tr>
+											
+																				<td class="col-xs-2">尾款</td>
+																				<td class="col-xs-4">{$re.money_wan}</td>
+																			</tr>
+
+										
+									
+									
+									</tbody>
+								</table>
+								
+								
+             
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.page-content -->
+    </div>
+  </div><!-- /.main-content -->
+
+ {include file="public:footer"}
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+  <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+<script>
+  jQuery(function($) {
+    $('[data-rel=tooltip]').tooltip();
+
+    $( "#hide-option" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+
+  })
+</script>
+<script type="text/javascript">
+		function dels(id){
+			layer.confirm('你确定删除吗？', {icon: 3}, function(index){
+		    layer.close(index);
+		    window.location.href="__URL__/deletes/id/"+id;
+		  });
+	    }
+		</script>
+<script>
+function change(id){
+	$.ajax({
+		type:"post",
+		url:"__URL__/change",
+	    data:{id:id},
+	    datatype:"text",
+	    success:function(){
+	    	
+	    }
+	})
+}
+
+</script>
+
+
+  <script>
+  $("#change").click(function(){
+  	$("#sortForm").submit();
+  })
+
+  </script>
+</body>
+</html>
