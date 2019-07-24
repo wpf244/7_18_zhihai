@@ -21,7 +21,7 @@ class Teacher extends BaseAdmin
 
         $re=db("teacher")->where("id",$id)->find();
 
-        $this->assign("re",$re);
+       
 
         $re['major']=db("dancer_type")->where("id",$re['major'])->find()['name'];
 
@@ -37,8 +37,48 @@ class Teacher extends BaseAdmin
         }
         $re['tag']=$name;
 
+      //  $re['age']=$this->getAge(strtotime($re['birth']));
+
+        $this->assign("re",$re);
+
         return $this->fetch();
     }
+    /**
+     * 准备工作完毕 开始计算年龄函数
+     * @param  $birthday 出生时间 uninx时间戳
+     * @param  $time 当前时间
+     **/
+    public function getAge($birthday){
+
+        $byear=date('Y',$birthday);
+
+
+        $bmonth=date('m',$birthday);
+
+
+        $bday=date('d',$birthday);
+
+        //格式化当前时间年月日
+
+        $tyear=date('Y');
+
+        $tmonth=date('m');
+
+        $tday=date('d');
+    
+
+        //开始计算年龄
+
+        $age=$tyear-$byear;
+
+        if($bmonth>$tmonth || $bmonth==$tmonth && $bday>$tday){
+
+            $age--;
+
+        }
+        return $age;
+    }
+
     public function sort(){
         $data=input('post.');
    
@@ -185,6 +225,42 @@ class Teacher extends BaseAdmin
            
             if($re['recome'] == 0){
                 $res=db("teacher")->where("id=$id")->setField("recome",1);
+            }
+
+            echo '0';
+        }else{
+            echo '1';
+        }
+    }
+    public function changen()
+    {
+        $id=\input('id');
+        $re=db("teacher")->where("id=$id")->find();
+        if($re){
+            if($re['news'] == 1){
+                $res=db("teacher")->where("id=$id")->setField("news",0);
+            }
+           
+            if($re['news'] == 0){
+                $res=db("teacher")->where("id=$id")->setField("news",1);
+            }
+
+            echo '0';
+        }else{
+            echo '1';
+        }
+    }
+    public function changeh()
+    {
+        $id=\input('id');
+        $re=db("teacher")->where("id=$id")->find();
+        if($re){
+            if($re['hot'] == 1){
+                $res=db("teacher")->where("id=$id")->setField("hot",0);
+            }
+           
+            if($re['hot'] == 0){
+                $res=db("teacher")->where("id=$id")->setField("hot",1);
             }
 
             echo '0';

@@ -67,6 +67,8 @@
                   <th>添加时间</th>
                   <th>状态</th>
                   <th>推荐</th>
+                  <th>新入</th>
+                  <th>最热</th>
                   <th style="border-right:#ddd solid 1px;">操作</th>
                 </tr>
                 </thead>
@@ -98,6 +100,18 @@
                     <td>
                       <label>
                         <input id="statu" name="groom" onclick="changes({$v.id})" class="ace ace-switch ace-switch-6" type="checkbox" {if condition="$v.recome eq 1"}checked{/if} />
+                        <span class="lbl"></span>
+                      </label>
+                    </td>
+                    <td>
+                      <label>
+                        <input id="statu" name="status" onclick="changen({$v.id})" class="ace ace-switch ace-switch-6" type="checkbox" {if condition="$v.news eq 1"}checked{/if} />
+                        <span class="lbl"></span>
+                      </label>
+                    </td>
+                    <td>
+                      <label>
+                        <input id="statu" name="groom" onclick="changeh({$v.id})" class="ace ace-switch ace-switch-6" type="checkbox" {if condition="$v.hot eq 1"}checked{/if} />
                         <span class="lbl"></span>
                       </label>
                     </td>
@@ -276,6 +290,28 @@ $(function(){
       $.ajax({
         type:"post",
         url:"__URL__/changes",
+          data:{id:id},
+          datatype:"text",
+          success:function(){
+            
+          }
+      })
+    }
+    function changen(id){
+      $.ajax({
+        type:"post",
+        url:"__URL__/changen",
+          data:{id:id},
+          datatype:"text",
+          success:function(){
+            
+          }
+      })
+    }
+    function changeh(id){
+      $.ajax({
+        type:"post",
+        url:"__URL__/changeh",
           data:{id:id},
           datatype:"text",
           success:function(){

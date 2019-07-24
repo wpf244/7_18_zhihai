@@ -13,7 +13,7 @@ class Member extends BaseAdmin
 
         if($key){
 
-            $map["username|phone"]=["like","%".$key."%"];
+            $map["nickname|phone"]=["like","%".$key."%"];
 
         }else{
             $key="";

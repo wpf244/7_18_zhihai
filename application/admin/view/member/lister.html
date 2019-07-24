@@ -34,13 +34,9 @@
             <div class="col-sm-10 col-sm-offset-1">
               <div class="page-header">
                   <div class="row">
-                      <div class="col-sm-2">
-                        <a class="btn btn-success btn-white btn-bold" href="javascript:;" id="out">
-                          <i class="ace-icon fa fa-plus icon-only"></i>
-                          导出excel</a>
-                        </div> 
+                   
         
-                         <div class="col-sm-10 clearfix">
+                         <div class="col-sm-12 clearfix">
                           <form class="form-inline pull-right" action="__URL__/lister" method="post">
          
                             <div class="form-group">
@@ -62,10 +58,10 @@
                 <thead>
                 <tr>
                   <th>ID</th>           
-                  <th class="hidden-480">会员名</th>
-                  <th class="hidden-480">手机号码</th>
+                  <th class="hidden-480">会员昵称</th>
+                  <th class="hidden-480">会员头像</th>
                 
-                  <th class="hidden-480">积分</th>
+                  <th class="hidden-480">会员等级</th>
                   <th class="hidden-480">注册时间</th>
                   <th style="border-right:#ddd solid 1px;">操作</th>
                 </tr>
@@ -75,11 +71,20 @@
                 <tr class="ace-thumbnails">
               
                   <td><span class="badge badge-grey">{$v.uid}</span></td>
-                  <td>{$v.username}</td>
-                  <td>{$v.phone}</td>
+                  <td>{$v.nickname}</td>
+                  <td class="ace-thumbnails hidden-480">
+                    <li>
+                      <img width="80" height="80" alt="150x150" src="{$v.image}"/>
+                      
+                    </li>
+                  </td>
                   
                  
-                  <td>{$v.integ}<i class="ace-icon fa fa-pencil bigger-120" onclick="change_money({$v.uid})"></i></td>
+                  <td>{if condition="$v.level eq 0"}游客{/if}
+                    {if condition="$v.level eq 1"}舞者{/if}
+                    {if condition="$v.level eq 2"}机构{/if}
+
+                  </td>
                 
                   <td class="hidden-480">{$v.time|date="Y-m-d H:i:s",###}</td>
                   <td>

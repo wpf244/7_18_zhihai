@@ -94,7 +94,7 @@ class Dancer extends BaseAdmin
 
         $re=db("dancer")->where("id",$id)->find();
 
-        $this->assign("re",$re);
+        
 
         $re['major']=db("dancer_type")->where("id",$re['major'])->find()['name'];
 
@@ -109,6 +109,8 @@ class Dancer extends BaseAdmin
             $name.=$v['name'].',';
         }
         $re['tag']=$name;
+
+        $this->assign("re",$re);
 
         return $this->fetch();
     }
@@ -167,6 +169,7 @@ class Dancer extends BaseAdmin
                if($re['uid'] != 0){
                    $data['birth']=$re['birth'];
                    $data['phone']=$re['phone'];
+                   $data['level']=1;
 
                    db("user")->where("uid",$re['uid'])->update($data);
                }
