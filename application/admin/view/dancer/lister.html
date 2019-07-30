@@ -124,11 +124,11 @@
                     <a class="btn btn-xs btn-success" href="{:url('Dancer/looks',array('id'=>$v['id']))}">
                       查看详情
                     </a>
-                    {if condition="$status eq 2 "}
+                    
                     <a class="btn btn-xs btn-success" href="{:url('Dancer/modify',array('id'=>$v['id']))}">
                       修改
                     </a>
-                    {/if}
+                    
                     <button class="btn btn-xs btn-danger" type="button" onclick="dels({$v.id})">
                       删除
                     </button>

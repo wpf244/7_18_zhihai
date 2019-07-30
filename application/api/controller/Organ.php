@@ -3,7 +3,7 @@ namespace app\api\controller;
 
 use think\Request;
 
-class Organ extends BaseHome
+class Organ extends BaseApi
 {
     public function index()
     {
@@ -120,46 +120,7 @@ class Organ extends BaseHome
         return json($arr);
 
     }
-    /**
-    * 机构详情
-    *
-    * @return void
-    */
-    public function detail()
-    {
-        $id=input("id");
-
-        $re=db("organ")->where("id",$id)->find();
-
-        $url=parent::getUrl();
-
-        if($re['uid'] != 0){
-            $image=explode(",",$re['image']);
-
-            foreach($image as $v){
-                $images[]=$url.$v;
-            }
-            $re['image']=$images;
-        }
-
-        $re['logo']=$url.$re['logo'];
-
-        $re['age']=db("organ_type")->where(["id"=>$re['yid']])->find()['name'];
-
-        $re['people']=db("organ_type")->where(["id"=>$re['pid']])->find()['name'];
-
-        $re['job']=db("job")->field("id,name,addr,age,edu,money")->where(["fid"=>$id,"status"=>2])->select();
-
-
-
-        $arr=[
-            'error_code'=>0,
-            'msg'=>'获取成功',
-            'data'=>$re
-        ];
-
-        return json($arr);
-    }
+   
     /**
     * 职位详情
     *

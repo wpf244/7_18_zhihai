@@ -447,5 +447,168 @@ class User extends BaseHome
         ];
         return json($arr);
     }
+    /**
+    * 老师详情
+    *
+    * @return void
+    */
+    public function teacher_detail()
+    {
+        $id=input("id");
+
+        $re=db("teacher")->where("id",$id)->find();
+
+       if($re){
+
+            $url=parent::getUrl();
+
+            $re['image']=$url.$re['image'];
+
+            $re['major']=db("dancer_type")->where("id",$re['major'])->find()['name'];
+
+            $re['edu']=db("dancer_type")->where("id",$re['edu'])->find()['name'];
+
+            $re['tag']=explode(",",$re['tag']);
+
+            $tags=db("dancer_type")->where("id","in",$re['tag'])->select();
+
+            $name='';
+            foreach($tags as $v){
+                $name.=$v['name'].',';
+            }
+            $re['tag']=$name;
+
+            $arr=[
+                'error_code'=>0,
+                'msg'=>'获取成功',
+                'data'=>$re
+            ];
+       }else{
+            $arr=[
+                'error_code'=>1,
+                'msg'=>'非法请求',
+                'data'=>[
+                    
+                
+                ]
+            ];
+       }
+       return json($arr);
+       
+    }
+    /**
+    * 新闻详情
+    *
+    * @return void
+    */
+    public function news_detail()
+    {
+        $id=input("id");
+
+        $re=db("news")->field("id,title,time,browse,content")->where(["id"=>$id,"status"=>1])->find();
+
+        db("news")->where("id",$id)->setInc("browse",1);
+
+        $arr=[
+            'error_code'=>0,
+            'msg'=>'获取成功',
+            'data'=>$re
+        ];
+        return json($arr);
+    }
+    /**
+    * 舞者详情
+    *
+    * @return void
+    */
+    public function detail()
+    {
+        $id=input("id");
+
+        $re=db("dancer")->where("id",$id)->find();
+
+       if($re){
+
+            $url=parent::getUrl();
+
+            if($re['uid'] == 0){
+
+                $re['image']=$url.$re['image'];
+
+            }else{
+                $re['image']=db("user")->where("uid",$re['uid'])->find()['image'];
+            }
+
+            $re['major']=db("dancer_type")->where("id",$re['major'])->find()['name'];
+
+            $re['edu']=db("dancer_type")->where("id",$re['edu'])->find()['name'];
+
+            $re['tag']=explode(",",$re['tag']);
+
+            $tags=db("dancer_type")->where("id","in",$re['tag'])->select();
+
+            $name='';
+            foreach($tags as $v){
+                $name.=$v['name'].',';
+            }
+            $re['tag']=$name;
+
+            $arr=[
+                'error_code'=>0,
+                'msg'=>'获取成功',
+                'data'=>$re
+            ];
+       }else{
+            $arr=[
+                'error_code'=>1,
+                'msg'=>'非法请求',
+                'data'=>[
+                    
+                
+                ]
+            ];
+       }
+       return json($arr);
+    }
+     /**
+    * 机构详情
+    *
+    * @return void
+    */
+    public function organ_detail()
+    {
+        $id=input("id");
+
+        $re=db("organ")->where("id",$id)->find();
+
+        $url=parent::getUrl();
+
+        if($re['uid'] != 0){
+            $image=explode(",",$re['image']);
+
+            foreach($image as $v){
+                $images[]=$url.$v;
+            }
+            $re['image']=$images;
+        }
+
+        $re['logo']=$url.$re['logo'];
+
+        $re['age']=db("organ_type")->where(["id"=>$re['yid']])->find()['name'];
+
+        $re['people']=db("organ_type")->where(["id"=>$re['pid']])->find()['name'];
+
+        $re['job']=db("job")->field("id,name,addr,age,edu,money")->where(["fid"=>$id,"status"=>2])->select();
+
+
+
+        $arr=[
+            'error_code'=>0,
+            'msg'=>'获取成功',
+            'data'=>$re
+        ];
+
+        return json($arr);
+    }
      
 }
