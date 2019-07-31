@@ -600,7 +600,7 @@ class User extends BaseHome
 
         $re['job']=db("job")->field("id,name,addr,age,edu,money")->where(["fid"=>$id,"status"=>2])->select();
 
-
+        db("organ")->where("id",$id)->setInc("browse",1);
 
         $arr=[
             'error_code'=>0,

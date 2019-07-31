@@ -152,6 +152,25 @@ class Organ extends BaseApi
         return json($arr);
 
     }
+     /**
+    * 机构分类
+    *
+    * @return void
+    */
+    public function organ_type()
+    {
+        $arrs['age']=db("organ_type")->field("id,name")->where("type",1)->order("id asc")->select();
+
+        $arrs['people']=db("organ_type")->field("id,name")->where("type",2)->order("id asc")->select();
+
+        $arr=[
+            'error_code'=>0,
+            'msg'=>'获取成功',
+            'data'=>$arrs
+        ];
+
+        return json($arr);
+    }
     
    
 
